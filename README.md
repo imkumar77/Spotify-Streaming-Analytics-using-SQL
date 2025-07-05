@@ -19,6 +19,7 @@ This project highlights how SQL can be used not just for querying data, but also
 ---
 ## Dataset Overview
 Data : Spotify_Dataset.csv
+You can get this Data set from Kaggle : https://www.kaggle.com/datasets/sanjanchaudhari/spotify-dataset
 
 The data includes the following columns:
 
