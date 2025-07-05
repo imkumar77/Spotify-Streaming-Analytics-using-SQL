@@ -53,8 +53,8 @@ CREATE TABLE spotify (
     views FLOAT,
     likes BIGINT,
     comments BIGINT,
-    licensed VARCHAR(10),
-    official_video VARCHAR(10),
+    licensed boolean ,
+    official_video boolean,
     stream BIGINT,
     energy_liveness FLOAT,
     most_played_on VARCHAR(50)
