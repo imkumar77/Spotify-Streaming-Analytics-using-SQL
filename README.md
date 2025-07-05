@@ -19,6 +19,7 @@ This project highlights how SQL can be used not just for querying data, but also
 ---
 ## Dataset Overview
 Data : Spotify_Dataset.csv
+
 You can get this Data set from Kaggle : https://www.kaggle.com/datasets/sanjanchaudhari/spotify-dataset
 
 The data includes the following columns:
@@ -59,3 +60,40 @@ CREATE TABLE spotify (
     most_played_on VARCHAR(50)
 );
 ```
+
+---
+
+### 1️ Database Setup
+- Created a MySQL database named `Spotify`.
+- Defined the `spotify` table to store track-level data with columns for artist, album, audio features (e.g., energy, liveness), and user engagement (e.g., views, likes, comments).
+
+### 2️ Data Cleaning & Preparation
+- Modified data types for boolean-like columns (`licensed`, `official_video`) for consistency.
+- Ensured correct structure for attributes like `album_type`, `most_played_on`, and numeric columns for analysis.
+
+### 3️ Exploratory Data Analysis (EDA)
+- Inspected distinct album types and initial rows of the dataset.
+- Verified data distribution across categories and validated presence of key attributes.
+
+### 4️ Querying the Data
+- Wrote SQL queries grouped into three difficulty levels:
+
+### 5 Analysis Objectives
+
+- List all tracks with more than 1B streams
+- Show all albums with their respective artists
+- Get total comments on licensed tracks
+- Filter tracks from album type "single"
+- Count number of tracks by each artist
+- Calculate average danceability by album
+- Get top 5 tracks with highest energy
+- List official videos with total views and likes
+- Calculate total views per album
+- Compare Spotify vs YouTube streaming counts
+- Top 3 most-viewed tracks per artist (using window functions)
+- Tracks with above-average liveness
+- Energy gap within albums (using CTE)
+- Tracks with energy-to-liveness ratio > 1.2
+- Cumulative likes ordered by views (window function)
+
+
