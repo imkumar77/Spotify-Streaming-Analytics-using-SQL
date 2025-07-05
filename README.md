@@ -27,3 +27,34 @@ The data includes the following columns:
 - **duration_min, title, channel**
 - **views, likes, comments, licensed, official_video, stream, most_played_on**
 - **energy_liveness** (derived column: energy * liveness)
+
+## Database Setup
+
+```sql
+CREATE TABLE spotify (
+    artist VARCHAR(255),
+    track VARCHAR(255),
+    album VARCHAR(255),
+    album_type VARCHAR(50),
+    danceability FLOAT,
+    energy FLOAT,
+    loudness FLOAT,
+    speechiness FLOAT,
+    acousticness FLOAT,
+    instrumentalness FLOAT,
+    liveness FLOAT,
+    valence FLOAT,
+    tempo FLOAT,
+    duration_min FLOAT,
+    title VARCHAR(255),
+    channel VARCHAR(255),
+    views FLOAT,
+    likes BIGINT,
+    comments BIGINT,
+    licensed VARCHAR(10),
+    official_video VARCHAR(10),
+    stream BIGINT,
+    energy_liveness FLOAT,
+    most_played_on VARCHAR(50)
+);
+```
