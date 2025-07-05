@@ -221,13 +221,78 @@ where liveness/ energy >1.2;
 
 - Cumulative likes ordered by views (window function)
 ```sql
-select * from spotify ;
-select track,
-energy,
-liveness,
-liveness/ energy as energy_to_liveness_ratio
-from spotify
-where liveness/ energy >1.2;
+SELECT 
+    track,
+    artist,
+    views,
+    likes,
+    SUM(likes) OVER (ORDER BY views) AS cumulative_likes
+FROM spotify;
 ```
+
+### 6 Query Optimization
+- Analyzed performance of queries using `EXPLAIN`.
+- Created an index on the `artist` column to improve query speed.
+- Re-ran the same query to compare execution and planning times before and after optimization.
+
+### 7 Key SQL Concepts Used
+
+- Data filtering with WHERE and LIKE
+- Aggregations with SUM(), COUNT(), AVG()
+- Grouping and sorting using GROUP BY and ORDER BY
+- Window functions: RANK(), SUM() OVER
+- Common Table Expressions (CTEs) using WITH
+- Query optimization with EXPLAIN and indexing
+
+### 8 Tools & Technologies
+
+| Tool                | Purpose                           |
+| ------------------- | --------------------------------- |
+| MySQL               | Data storage and querying         |
+| SQL Functions       | Aggregation, Filtering, Windowing |
+| CTEs & Views        | Structuring complex queries       |
+| Workbench / DBeaver | SQL IDE for development           |
+
+---
+
+## Insights & Findings
+
+The SQL analysis of Spotify track data led to several valuable insights:
+
+- **High-Streaming Tracks**: A small group of tracks surpassed 1 billion streams, indicating strong user preference and repeat play behavior.
+
+-  **Artist Productivity**: Certain artists have released a significantly higher number of tracks, reflecting either high productivity or multiple versions (live, remixes, etc.).
+
+- **Album Type Trends**: "Single" type albums dominate the dataset, which aligns with current music release strategies in streaming culture.
+
+- **User Engagement**: Licensed tracks received significantly more comments, suggesting a correlation between licensing and user interaction.
+
+- **Top Energy Tracks**: The top 5 most energetic tracks may be well-suited for high-activity playlists like workouts or parties.
+
+- **Official Videos Perform Better**: Tracks with `official_video = TRUE` have noticeably higher views and likes, underlining the impact of visual content on music engagement.
+
+- **Spotify vs YouTube Trends**: Platform-specific popularity varies — some tracks are streamed more on YouTube, while others perform better on Spotify, hinting at demographic or format-based preferences.
+
+- **Danceability Averages**: Some albums consistently score higher in danceability, useful for recommending upbeat, rhythmic playlists.
+
+- **Energy Variance in Albums**: Using CTEs, you identified albums with the widest energy range, useful for albums that offer a "journey" rather than a uniform sound.
+
+- **Liveness & Energy Ratios**: Tracks with a high energy-to-liveness ratio may simulate a "live performance" vibe, even if not recorded live.
+
+- **Cumulative Engagement**: Cumulative likes by views revealed patterns in early engagement vs long-term popularity growth.
+
+- **Performance Optimization**: By creating an index on the `artist` column, query performance was drastically improved — reducing execution time from ~7ms to ~0.15ms.
+
+---
+
+##  Conclusion
+
+This project demonstrated how SQL can be a powerful tool for exploring, analyzing, and optimizing real-world datasets — in this case, Spotify track-level music data. By writing progressively complex queries, we uncovered insights into artist popularity, listener behavior, platform trends, and audio characteristics.
+
+Through the use of advanced SQL techniques such as window functions, CTEs, and indexing, the project also highlighted the importance of efficient query structuring and performance tuning. These insights not only provide business value for music platforms and curators but also reflect strong data analysis and problem-solving skills.
+
+The project serves as a complete example of turning raw, denormalized data into actionable insights using structured query language — a valuable skill in any data-driven role.
+
+
 
 
