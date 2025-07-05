@@ -81,19 +81,153 @@ CREATE TABLE spotify (
 ### 5 Analysis Objectives
 
 - List all tracks with more than 1B streams
+```sql
+select* from spotify 
+where stream > 1000000000;
+  ```
 - Show all albums with their respective artists
-- Get total comments on licensed tracks
+```sql
+  select album, artist 
+from spotify ;
+```
+
+- Get total comments on licensed tracks = True
+```sql
+select sum(comments)
+from spotify 
+where licensed = 'true';
+```
+
 - Filter tracks from album type "single"
+``` sql
+select * from spotify 
+where album_type = 'single' ;
+```
+
 - Count number of tracks by each artist
+``` sql
+select artist, count(*) as Total_num_song
+from spotify
+group by artist;
+```
+
 - Calculate average danceability by album
+```sql
+select album, avg(danceability) as avg_danceability from spotify
+group by 1 
+order by avg_danceability desc;
+```
+
 - Get top 5 tracks with highest energy
+```sql
+select 
+track, 
+max(energy) as energy_level
+ from spotify 
+ group by track
+ order by energy_level desc
+ limit 5 ;
+```
+
+
 - List official videos with total views and likes
+```sql
+select
+track, 
+sum(views) as Total_views ,
+sum( likes) as Total_likes
+ from spotify 
+ where official_video = 'TRUE'
+ group by track ;
+```
+
 - Calculate total views per album
+```sql
+ select 
+  album ,
+ Track,
+ sum(views) as Total_views
+ from spotify
+ group by  1, 2 ;
+```
 - Compare Spotify vs YouTube streaming counts
+```sql
+SELECT 
+    track,
+    most_played_on,
+    stream 
+FROM spotify 
+WHERE most_played_on IN ('youtube', 'spotify');
+
+SELECT 
+    track AS track_name,
+    COALESCE(SUM(CASE WHEN most_played_on = 'youtube' THEN stream END), 0) AS stream_on_youtube,
+    COALESCE(SUM(CASE WHEN most_played_on = 'spotify' THEN stream END), 0) AS stream_on_spotify
+FROM spotify
+GROUP BY track;
+```
+
 - Top 3 most-viewed tracks per artist (using window functions)
+```sql
+WITH ranking_artist AS (
+    SELECT 
+        artist,
+        track,
+        SUM(views) AS total_view,
+        DENSE_RANK() OVER (PARTITION BY artist ORDER BY SUM(views) DESC) AS R1
+    FROM spotify
+    GROUP BY artist, track
+)
+```
+
 - Tracks with above-average liveness
+```sql
+select track,
+artist,
+ liveness
+ from spotify
+ where liveness>(
+ select avg(liveness) from spotify) ;
+```
+
 - Energy gap within albums (using CTE)
+```sql
+WITH cte
+AS
+(SELECT 
+	album,
+	MAX(energy) as highest_energy,
+	MIN(energy) as lowest_energery
+FROM spotify
+GROUP BY 1
+)
+SELECT 
+	album,
+	highest_energy - lowest_energery as energy_diff
+FROM cte
+ORDER BY 2 DESC ;
+```
+
 - Tracks with energy-to-liveness ratio > 1.2
+```sql
+select * from spotify ;
+select track,
+energy,
+liveness,
+liveness/ energy as energy_to_liveness_ratio
+from spotify
+where liveness/ energy >1.2;
+```
+
 - Cumulative likes ordered by views (window function)
+```sql
+select * from spotify ;
+select track,
+energy,
+liveness,
+liveness/ energy as energy_to_liveness_ratio
+from spotify
+where liveness/ energy >1.2;
+```
 
 
