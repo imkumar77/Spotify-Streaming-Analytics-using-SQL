@@ -293,6 +293,12 @@ Through the use of advanced SQL techniques such as window functions, CTEs, and i
 
 The project serves as a complete example of turning raw, denormalized data into actionable insights using structured query language — a valuable skill in any data-driven role.
 
+---
+
+## License
+
+This project is licensed under the MIT License.
+
 
 
 
